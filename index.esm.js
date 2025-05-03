@@ -1,14 +1,6 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-var propertyExpr = require('property-expr');
-var tinyCase = require('tiny-case');
-var toposort = require('toposort');
-
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var toposort__default = /*#__PURE__*/_interopDefaultLegacy(toposort);
+import { getter, forEach, split, normalizePath, join } from 'property-expr';
+import { camelCase, snakeCase } from 'tiny-case';
+import toposort from 'toposort';
 
 const toString = Object.prototype.toString;
 const errorToString = Error.prototype.toString;
@@ -272,7 +264,7 @@ class Reference {
     this.isSibling = !this.isContext && !this.isValue;
     let prefix = this.isContext ? prefixes.context : this.isValue ? prefixes.value : '';
     this.path = this.key.slice(prefix.length);
-    this.getter = this.path && propertyExpr.getter(this.path, true);
+    this.getter = this.path && getter(this.path, true);
     this.map = options.map;
   }
   getValue(value, parent, context) {
@@ -403,7 +395,7 @@ function getIn(schema, path, value, context = value) {
     parentPath: path,
     schema
   };
-  propertyExpr.forEach(path, (_part, isBracket, isArray) => {
+  forEach(path, (_part, isBracket, isArray) => {
     let part = isBracket ? _part.slice(1, _part.length - 1) : _part;
     schema = schema.resolve({
       context,
@@ -1673,7 +1665,7 @@ function sortFields(fields, excludedEdges = []) {
   let nodes = new Set();
   let excludes = new Set(excludedEdges.map(([a, b]) => `${a}-${b}`));
   function addNode(depPath, key) {
-    let node = propertyExpr.split(depPath)[0];
+    let node = split(depPath)[0];
     nodes.add(node);
     if (!excludes.has(`${key}-${node}`)) edges.push([key, node]);
   }
@@ -1682,7 +1674,7 @@ function sortFields(fields, excludedEdges = []) {
     nodes.add(key);
     if (Reference.isRef(value) && value.isSibling) addNode(value.path, key);else if (isSchema(value) && 'deps' in value) value.deps.forEach(path => addNode(path, key));
   }
-  return toposort__default["default"].array(Array.from(nodes), edges).reverse();
+  return toposort.array(Array.from(nodes), edges).reverse();
 }
 
 function findIndex(arr, err) {
@@ -1740,10 +1732,10 @@ function deepPartial(schema) {
   return schema;
 }
 const deepHas = (obj, p) => {
-  const path = [...propertyExpr.normalizePath(p)];
+  const path = [...normalizePath(p)];
   if (path.length === 1) return path[0] in obj;
   let last = path.pop();
-  let parent = propertyExpr.getter(propertyExpr.join(path), true)(obj);
+  let parent = getter(join(path), true)(obj);
   return !!(parent && last in parent);
 };
 let isObject = obj => Object.prototype.toString.call(obj) === '[object Object]';
@@ -1959,7 +1951,7 @@ class ObjectSchema extends Schema {
     return this.pick(remaining);
   }
   from(from, to, alias) {
-    let fromGetter = propertyExpr.getter(from, true);
+    let fromGetter = getter(from, true);
     return this.transform(obj => {
       if (!obj) return obj;
       let newObj = obj;
@@ -2035,13 +2027,13 @@ class ObjectSchema extends Schema {
     });
   }
   camelCase() {
-    return this.transformKeys(tinyCase.camelCase);
+    return this.transformKeys(camelCase);
   }
   snakeCase() {
-    return this.transformKeys(tinyCase.snakeCase);
+    return this.transformKeys(snakeCase);
   }
   constantCase() {
-    return this.transformKeys(key => tinyCase.snakeCase(key).toUpperCase());
+    return this.transformKeys(key => snakeCase(key).toUpperCase());
   }
   describe(options) {
     const next = (options ? this.resolve(options) : this).clone();
@@ -2449,32 +2441,4 @@ function addMethod(schemaType, name, fn) {
   schemaType.prototype[name] = fn;
 }
 
-exports.ArraySchema = ArraySchema;
-exports.BooleanSchema = BooleanSchema;
-exports.DateSchema = DateSchema;
-exports.LazySchema = Lazy;
-exports.MixedSchema = MixedSchema;
-exports.NumberSchema = NumberSchema;
-exports.ObjectSchema = ObjectSchema;
-exports.Schema = Schema;
-exports.StringSchema = StringSchema;
-exports.TupleSchema = TupleSchema;
-exports.ValidationError = ValidationError;
-exports.addMethod = addMethod;
-exports.array = create$2;
-exports.bool = create$7;
-exports.boolean = create$7;
-exports.date = create$4;
-exports.defaultLocale = locale;
-exports.getIn = getIn;
-exports.isSchema = isSchema;
-exports.lazy = create;
-exports.mixed = create$8;
-exports.number = create$5;
-exports.object = create$3;
-exports.printValue = printValue;
-exports.reach = reach;
-exports.ref = create$9;
-exports.setLocale = setLocale;
-exports.string = create$6;
-exports.tuple = create$1;
+export { ArraySchema, BooleanSchema, DateSchema, Lazy as LazySchema, MixedSchema, NumberSchema, ObjectSchema, Schema, StringSchema, TupleSchema, ValidationError, addMethod, create$2 as array, create$7 as bool, create$7 as boolean, create$4 as date, locale as defaultLocale, getIn, isSchema, create as lazy, create$8 as mixed, create$5 as number, create$3 as object, printValue, reach, create$9 as ref, setLocale, create$6 as string, create$1 as tuple };
