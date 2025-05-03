@@ -1,11 +1,9 @@
-'use strict';
-
 /**
  * Contains the list of OpenAPI data types
  * as defined by https://swagger.io/docs/specification/data-models/data-types/
  * @public
  */
-exports.SchemaType = void 0;
+var SchemaType;
 (function (SchemaType) {
     /** String type. */
     SchemaType["STRING"] = "string";
@@ -19,7 +17,7 @@ exports.SchemaType = void 0;
     SchemaType["ARRAY"] = "array";
     /** Object type. */
     SchemaType["OBJECT"] = "object";
-})(exports.SchemaType || (exports.SchemaType = {}));
+})(SchemaType || (SchemaType = {}));
 
 /**
  * @license
@@ -40,16 +38,16 @@ exports.SchemaType = void 0;
 /**
  * @public
  */
-exports.ExecutableCodeLanguage = void 0;
+var ExecutableCodeLanguage;
 (function (ExecutableCodeLanguage) {
     ExecutableCodeLanguage["LANGUAGE_UNSPECIFIED"] = "language_unspecified";
     ExecutableCodeLanguage["PYTHON"] = "python";
-})(exports.ExecutableCodeLanguage || (exports.ExecutableCodeLanguage = {}));
+})(ExecutableCodeLanguage || (ExecutableCodeLanguage = {}));
 /**
  * Possible outcomes of code execution.
  * @public
  */
-exports.Outcome = void 0;
+var Outcome;
 (function (Outcome) {
     /**
      * Unspecified status. This value should not be used.
@@ -69,7 +67,7 @@ exports.Outcome = void 0;
      * be a partial output present.
      */
     Outcome["OUTCOME_DEADLINE_EXCEEDED"] = "outcome_deadline_exceeded";
-})(exports.Outcome || (exports.Outcome = {}));
+})(Outcome || (Outcome = {}));
 
 /**
  * @license
@@ -96,7 +94,7 @@ const POSSIBLE_ROLES = ["user", "model", "function", "system"];
  * Harm categories that would cause prompts or candidates to be blocked.
  * @public
  */
-exports.HarmCategory = void 0;
+var HarmCategory;
 (function (HarmCategory) {
     HarmCategory["HARM_CATEGORY_UNSPECIFIED"] = "HARM_CATEGORY_UNSPECIFIED";
     HarmCategory["HARM_CATEGORY_HATE_SPEECH"] = "HARM_CATEGORY_HATE_SPEECH";
@@ -104,12 +102,12 @@ exports.HarmCategory = void 0;
     HarmCategory["HARM_CATEGORY_HARASSMENT"] = "HARM_CATEGORY_HARASSMENT";
     HarmCategory["HARM_CATEGORY_DANGEROUS_CONTENT"] = "HARM_CATEGORY_DANGEROUS_CONTENT";
     HarmCategory["HARM_CATEGORY_CIVIC_INTEGRITY"] = "HARM_CATEGORY_CIVIC_INTEGRITY";
-})(exports.HarmCategory || (exports.HarmCategory = {}));
+})(HarmCategory || (HarmCategory = {}));
 /**
  * Threshold above which a prompt or candidate will be blocked.
  * @public
  */
-exports.HarmBlockThreshold = void 0;
+var HarmBlockThreshold;
 (function (HarmBlockThreshold) {
     /** Threshold is unspecified. */
     HarmBlockThreshold["HARM_BLOCK_THRESHOLD_UNSPECIFIED"] = "HARM_BLOCK_THRESHOLD_UNSPECIFIED";
@@ -121,12 +119,12 @@ exports.HarmBlockThreshold = void 0;
     HarmBlockThreshold["BLOCK_ONLY_HIGH"] = "BLOCK_ONLY_HIGH";
     /** All content will be allowed. */
     HarmBlockThreshold["BLOCK_NONE"] = "BLOCK_NONE";
-})(exports.HarmBlockThreshold || (exports.HarmBlockThreshold = {}));
+})(HarmBlockThreshold || (HarmBlockThreshold = {}));
 /**
  * Probability that a prompt or candidate matches a harm category.
  * @public
  */
-exports.HarmProbability = void 0;
+var HarmProbability;
 (function (HarmProbability) {
     /** Probability is unspecified. */
     HarmProbability["HARM_PROBABILITY_UNSPECIFIED"] = "HARM_PROBABILITY_UNSPECIFIED";
@@ -138,12 +136,12 @@ exports.HarmProbability = void 0;
     HarmProbability["MEDIUM"] = "MEDIUM";
     /** Content has a high chance of being unsafe. */
     HarmProbability["HIGH"] = "HIGH";
-})(exports.HarmProbability || (exports.HarmProbability = {}));
+})(HarmProbability || (HarmProbability = {}));
 /**
  * Reason that a prompt was blocked.
  * @public
  */
-exports.BlockReason = void 0;
+var BlockReason;
 (function (BlockReason) {
     // A blocked reason was not specified.
     BlockReason["BLOCKED_REASON_UNSPECIFIED"] = "BLOCKED_REASON_UNSPECIFIED";
@@ -151,12 +149,12 @@ exports.BlockReason = void 0;
     BlockReason["SAFETY"] = "SAFETY";
     // Content was blocked, but the reason is uncategorized.
     BlockReason["OTHER"] = "OTHER";
-})(exports.BlockReason || (exports.BlockReason = {}));
+})(BlockReason || (BlockReason = {}));
 /**
  * Reason that a candidate finished.
  * @public
  */
-exports.FinishReason = void 0;
+var FinishReason;
 (function (FinishReason) {
     // Default value. This value is unused.
     FinishReason["FINISH_REASON_UNSPECIFIED"] = "FINISH_REASON_UNSPECIFIED";
@@ -180,12 +178,12 @@ exports.FinishReason = void 0;
     FinishReason["MALFORMED_FUNCTION_CALL"] = "MALFORMED_FUNCTION_CALL";
     // Unknown reason.
     FinishReason["OTHER"] = "OTHER";
-})(exports.FinishReason || (exports.FinishReason = {}));
+})(FinishReason || (FinishReason = {}));
 /**
  * Task type for embedding content.
  * @public
  */
-exports.TaskType = void 0;
+var TaskType;
 (function (TaskType) {
     TaskType["TASK_TYPE_UNSPECIFIED"] = "TASK_TYPE_UNSPECIFIED";
     TaskType["RETRIEVAL_QUERY"] = "RETRIEVAL_QUERY";
@@ -193,11 +191,11 @@ exports.TaskType = void 0;
     TaskType["SEMANTIC_SIMILARITY"] = "SEMANTIC_SIMILARITY";
     TaskType["CLASSIFICATION"] = "CLASSIFICATION";
     TaskType["CLUSTERING"] = "CLUSTERING";
-})(exports.TaskType || (exports.TaskType = {}));
+})(TaskType || (TaskType = {}));
 /**
  * @public
  */
-exports.FunctionCallingMode = void 0;
+var FunctionCallingMode;
 (function (FunctionCallingMode) {
     // Unspecified function calling mode. This value should not be used.
     FunctionCallingMode["MODE_UNSPECIFIED"] = "MODE_UNSPECIFIED";
@@ -212,18 +210,18 @@ exports.FunctionCallingMode = void 0;
     // Model will not predict any function call. Model behavior is same as when
     // not passing any function declarations.
     FunctionCallingMode["NONE"] = "NONE";
-})(exports.FunctionCallingMode || (exports.FunctionCallingMode = {}));
+})(FunctionCallingMode || (FunctionCallingMode = {}));
 /**
  * The mode of the predictor to be used in dynamic retrieval.
  * @public
  */
-exports.DynamicRetrievalMode = void 0;
+var DynamicRetrievalMode;
 (function (DynamicRetrievalMode) {
     // Unspecified function calling mode. This value should not be used.
     DynamicRetrievalMode["MODE_UNSPECIFIED"] = "MODE_UNSPECIFIED";
     // Run retrieval only when system decides it is necessary.
     DynamicRetrievalMode["MODE_DYNAMIC"] = "MODE_DYNAMIC";
-})(exports.DynamicRetrievalMode || (exports.DynamicRetrievalMode = {}));
+})(DynamicRetrievalMode || (DynamicRetrievalMode = {}));
 
 /**
  * @license
@@ -585,9 +583,9 @@ function getFunctionCalls(response) {
     }
 }
 const badFinishReasons = [
-    exports.FinishReason.RECITATION,
-    exports.FinishReason.SAFETY,
-    exports.FinishReason.LANGUAGE,
+    FinishReason.RECITATION,
+    FinishReason.SAFETY,
+    FinishReason.LANGUAGE,
 ];
 function hadBadFinishReason(candidate) {
     return (!!candidate.finishReason &&
@@ -1513,13 +1511,5 @@ class GoogleGenerativeAI {
     }
 }
 
-exports.ChatSession = ChatSession;
-exports.GenerativeModel = GenerativeModel;
-exports.GoogleGenerativeAI = GoogleGenerativeAI;
-exports.GoogleGenerativeAIAbortError = GoogleGenerativeAIAbortError;
-exports.GoogleGenerativeAIError = GoogleGenerativeAIError;
-exports.GoogleGenerativeAIFetchError = GoogleGenerativeAIFetchError;
-exports.GoogleGenerativeAIRequestInputError = GoogleGenerativeAIRequestInputError;
-exports.GoogleGenerativeAIResponseError = GoogleGenerativeAIResponseError;
-exports.POSSIBLE_ROLES = POSSIBLE_ROLES;
-//# sourceMappingURL=index.js.map
+export { BlockReason, ChatSession, DynamicRetrievalMode, ExecutableCodeLanguage, FinishReason, FunctionCallingMode, GenerativeModel, GoogleGenerativeAI, GoogleGenerativeAIAbortError, GoogleGenerativeAIError, GoogleGenerativeAIFetchError, GoogleGenerativeAIRequestInputError, GoogleGenerativeAIResponseError, HarmBlockThreshold, HarmCategory, HarmProbability, Outcome, POSSIBLE_ROLES, SchemaType, TaskType };
+//# sourceMappingURL=index.mjs.map
